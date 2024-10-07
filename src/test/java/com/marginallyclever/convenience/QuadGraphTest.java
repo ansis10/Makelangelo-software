@@ -1,4 +1,5 @@
 package com.marginallyclever.convenience;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,14 +7,14 @@ import java.util.Random;
 
 public class QuadGraphTest {
     private QuadGraph quadGraph;
-    private Random random;
+    private Faker faker;
 
     @BeforeEach
     public void setUp() {
         // Initialize the QuadGraph to cover a region from (0, 0) to (100, 100)
         quadGraph = new QuadGraph(0, 0, 100, 100);
-        // Use a fixed seed for reproducibility
-        random = new Random(42);
+        // Initialize Faker with a fixed seed for reproducibility
+        faker = new Faker(new Random(42));  // Use Random(42) to ensure reproducibility
     }
 
     @Test
@@ -62,8 +63,8 @@ public class QuadGraphTest {
 
     // Helper method to generate random points within the bounds of the QuadGraph (0, 0) to (100, 100)
     private Point2D generateRandomPoint() {
-        double x = random.nextDouble() * 100;
-        double y = random.nextDouble() * 100;
+        double x = faker.number().randomDouble(6, 0, 100); // Generates a random double with up to 6 decimal places
+        double y = faker.number().randomDouble(6, 0, 100); // Generates a random double with up to 6 decimal places
         return new Point2D(x, y);
     }
 }

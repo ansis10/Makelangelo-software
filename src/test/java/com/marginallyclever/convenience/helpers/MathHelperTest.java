@@ -2,9 +2,7 @@ package com.marginallyclever.convenience.helpers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import javax.vecmath.Point2d;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MathHelperTest {

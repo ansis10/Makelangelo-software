@@ -1,21 +1,22 @@
 package com.marginallyclever.convenience;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.util.Random;
 
 public class LineInterpolatorTest {
 
     @Test
     public void testGetPoint() {
-        Random random = new Random();
+        Faker faker = new Faker(); // Initialize Faker
+
         // Generate random start and end points for the line
         for (int i = 0; i < 100; i++) {
-            Point2D start = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
-            Point2D end = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
+            Point2D start = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
+            Point2D end = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
             LineInterpolator lineInterpolator = new LineInterpolator(start, end);
 
-            // Generate random values of t between 0 and 1
-            double t = random.nextDouble();
+            // Generate a random value of t between 0 and 1
+            double t = faker.number().randomDouble(6, 0, 1);
             Point2D point = new Point2D();
             lineInterpolator.getPoint(t, point);
 
@@ -31,14 +32,16 @@ public class LineInterpolatorTest {
 
     @Test
     public void testGetTangent() {
-        Random random = new Random();
+        Faker faker = new Faker(); // Initialize Faker
+
+        // Generate random start and end points for the line
         for (int i = 0; i < 100; i++) {
-            Point2D start = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
-            Point2D end = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
+            Point2D start = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
+            Point2D end = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
             LineInterpolator lineInterpolator = new LineInterpolator(start, end);
 
             // Generate a random value of t between 0 and 1
-            double t = random.nextDouble();
+            double t = faker.number().randomDouble(6, 0, 1);
             Point2D tangent = new Point2D();
             lineInterpolator.getTangent(t, tangent);
 
@@ -50,14 +53,16 @@ public class LineInterpolatorTest {
 
     @Test
     public void testGetNormal() {
-        Random random = new Random();
+        Faker faker = new Faker(); // Initialize Faker
+
+        // Generate random start and end points for the line
         for (int i = 0; i < 100; i++) {
-            Point2D start = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
-            Point2D end = new Point2D(random.nextDouble() * 100, random.nextDouble() * 100);
+            Point2D start = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
+            Point2D end = new Point2D(faker.number().randomDouble(6, 0, 100), faker.number().randomDouble(6, 0, 100));
             LineInterpolator lineInterpolator = new LineInterpolator(start, end);
 
             // Generate a random value of t between 0 and 1
-            double t = random.nextDouble();
+            double t = faker.number().randomDouble(6, 0, 1);
             Point2D normal = new Point2D();
             lineInterpolator.getNormal(t, normal);
 
