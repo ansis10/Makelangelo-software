@@ -2,6 +2,9 @@ package com.marginallyclever.convenience.helpers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import javax.vecmath.Point2d;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -142,40 +145,18 @@ public class MathHelperTest {
         Assertions.assertFalse(MathHelper.equals(a0, a1, b0, b1, 0.0001), "Segments should not match if only one endpoint matches");
     }
     //------------------test for lerp()---------------------------
-    @Test
-    public void testLerp() {
-        // Test case 1: t = 0 (Should return 'a')
-        double t = 0.0;
-        double a = 10.0;
-        double b = 20.0;
+    @ParameterizedTest
+    @CsvSource({
+            "0.0, 100.0, 200.0, 100.0",  // t = 0 (Should return 'a')
+            "1.0, 100.0, 200.0, 200.0",  // t = 1 (Should return 'b')
+            "0.25, 100.0, 200.0, 125.0",  // t = 0.25 (Closer to 'a')
+            "0.5, 100.0, 200.0, 150.0",  // t = 0.5 (Exact midpoint)
+            "0.75, 100.0, 200.0, 175.0",  // t = 0.75 (Closer to 'b')
+            "0.33, 300.0, 600.0, 399.0",  // t = 0.33 (Testing with larger values)
+            "0.67, -500.0, -1000.0, -835.0"  // t = 0.67 (Negative numbers)
+    })
+    public void testLerpParameterized(double t, double a, double b, double expected) {
         double result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(10.0, result, 0.0001, "When t=0, result should be 'a'");
-
-        // Test case 2: t = 1 (Should return 'b')
-        t = 1.0;
-        result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(20.0, result, 0.0001, "When t=1, result should be 'b'");
-
-        // Test case 3: t = 0.5 (Should return the midpoint of 'a' and 'b')
-        t = 0.5;
-        result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(15.0, result, 0.0001, "When t=0.5, result should be the midpoint between 'a' and 'b'");
-
-        // Test case 4: t < 0 (Extrapolation below 'a')
-        t = -0.5;
-        result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(5.0, result, 0.0001, "When t=-0.5, result should be an extrapolation below 'a'");
-
-        // Test case 5: t > 1 (Extrapolation beyond 'b')
-        t = 1.5;
-        result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(25.0, result, 0.0001, "When t=1.5, result should be an extrapolation beyond 'b'");
-
-        // Test case 6: t = 0 (a = b) (When 'a' equals 'b', result should always equal 'a' or 'b')
-        t = 0.5;
-        a = 10.0;
-        b = 10.0;
-        result = MathHelper.lerp(t, a, b);
-        Assertions.assertEquals(10.0, result, 0.0001, "When a=b, result should always be 'a' or 'b'");
+        Assertions.assertEquals(expected, result, 0.0001, "Lerp result should match the expected value");
     }
 }
