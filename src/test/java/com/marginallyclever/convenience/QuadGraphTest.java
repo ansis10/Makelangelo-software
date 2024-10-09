@@ -14,7 +14,7 @@ public class QuadGraphTest {
         // Initialize the QuadGraph to cover a region from (0, 0) to (100, 100)
         quadGraph = new QuadGraph(0, 0, 100, 100);
         // Initialize Faker with a fixed seed for reproducibility
-        faker = new Faker(new Random(42));  // Use Random(42) to ensure reproducibility
+        faker = new Faker(new Random(42));
     }
 
     @Test
@@ -32,13 +32,12 @@ public class QuadGraphTest {
 
     @Test
     public void testInsertAndSplit() {
-        // Insert more than MAX_POINTS (which is 5) to trigger a split
+
         for (int i = 0; i < 6; i++) {
             Point2D randomPoint = generateRandomPoint();
             quadGraph.insert(randomPoint);
         }
 
-        // Verify that the QuadGraph has split
         Assertions.assertNotNull(quadGraph.children, "QuadGraph should have children after split");
 
         // Verify that the points are moved into the children after the split
