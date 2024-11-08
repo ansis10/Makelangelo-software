@@ -7,6 +7,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jvm_opts: [
+          "-XX:+PrintFlagsFinal -XX:+UseG1GC",
+          "-XX:+UnlockExperimentalVMOptions -XX:+UseStringDeduplication",
+          "-XX:+PrintGCDetails -XX:+UseConcMarkSweepGC",
+          "-XX:+UseG1GC -XX:+PrintGCDetails"
+        ]
     steps:
     - uses: actions/checkout@v4
 
@@ -16,10 +24,13 @@ jobs:
         java-version: '17'
         cache: 'maven'
 
+    - name: Set Maven options
+      run: echo "MAVEN_OPTS=${{ matrix.jvm_opts }}" >> $GITHUB_ENV
+
     - name: Build and Test with Maven
       timeout-minutes: 15
       run: |
-        export MAVEN_OPTS="-XX:+PrintFlagsFinal" 
+#        export MAVEN_OPTS="-XX:+PrintFlagsFinal"
         xvfb-run mvn -B verify -Djavafx.platform=linux jacoco:report -Pcoverage
         unset MAVEN_OPTS
 
