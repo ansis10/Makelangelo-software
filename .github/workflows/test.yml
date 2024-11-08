@@ -25,7 +25,8 @@ jobs:
         cache: 'maven'
 
     - name: Set Maven options
-      run: echo "MAVEN_OPTS=${{ matrix.jvm_opts }}" >> $GITHUB_ENV
+      run: |
+        echo "MAVEN_OPTS=${{ matrix.jvm_opts }}" >> $GITHUB_ENV
 
     - name: Build and Test with Maven
       timeout-minutes: 15
