@@ -19,7 +19,7 @@ jobs:
     - name: Build and Test with Maven
       timeout-minutes: 15
       run: |
-        export MAVEN_OPTS="-XX:+PrintFlagsFinal"
+        export MAVEN_OPTS="-XX:+PrintFlagsFinal" 
         xvfb-run mvn -B verify -Djavafx.platform=linux jacoco:report -Pcoverage
         unset MAVEN_OPTS
 
