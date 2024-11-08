@@ -12,7 +12,7 @@ jobs:
         jvm_opts: [
           "-XX:+PrintFlagsFinal -XX:+UseG1GC",
           "-XX:+UnlockExperimentalVMOptions -XX:+UseStringDeduplication",
-          "-XX:+PrintGCDetails -XX:+UseConcMarkSweepGC",
+          "-XX:+PrintGCDetails ",
           "-XX:+UseG1GC -XX:+PrintGCDetails"
         ]
     steps:
