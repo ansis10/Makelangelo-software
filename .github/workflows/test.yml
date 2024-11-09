@@ -1,5 +1,5 @@
 name: Java CI with Maven
-# lol commit test 2
+# lol commit test 3
 on:
   push:
   pull_request:
