@@ -61,3 +61,4 @@ Exécute la JVM en mode "headless", ce qui est particulièrement important si on
 2. https://www.oracle.com/technical-resources/articles/javase/headless.html
 3. https://docs.oracle.com/javase/9/troubleshoot/time-zone-settings-jre.htm#GUID-6FE66D13-4C13-452E-BABE-8805876FE6C5
 4. https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/clopts001.html
+
